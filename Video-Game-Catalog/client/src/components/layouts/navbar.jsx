@@ -100,20 +100,67 @@ function profileMenu() {
                             isLastItem  //isLastItem may cause error since it has yet to be defined (isLastItem is the signout, which we want to display as red text, hence this part of the logic)
                                 ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10" : ""
                         }`}
-                        {
-                            React.createElement(icon, {
-                                className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`
-                            })
-                        }
-                        ></MenuItem>
-                    )
+                        > {/**was missing this */}
+                        {React.createElement(icon, {
+                            className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
+                            strokeWidth: 2,
+                          })}
+                            <Typography
+                                as="span"
+                                variant='small'
+                                className='font-normal'
+                                color={isLastItem ? "red" : "inherit"}
+                                >
+                                    {label}
+                                </Typography>
+                        </MenuItem>
+                    );
                 })}
             </MenuList>
         </Menu>
-    )
+    );
 }
 
+// nav list menu
+const navListMenuItems = [  //this is an array of objects datatype
+    {
+        title: '@material-tailwind/html',  //adjust this as needed, this is what will be displayed in the hover portion of the pages section of the navbar, the title will be displayed in bold fonts
+        description: "Learn how to use @material-tailwind/html, packed with rich components and widgets.",  //placeholder text, modify as needed later
+    },
+    {
+        title: '@material-tailwind/react',
+        description: "Learn how to use @material-tailwind/react, packed with rich components for React.",
+    },
+    {
+        title: 'Material Tailwind PRO',
+        description: "A complete set of UI Elements for building faster websites in less time.",
+    },
+];
 
+
+function NavListMenu() {
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+    const renderItems = navListMenuItems.map(({title, description}) => (  //adjust the link based on the logic of the application
+        <a href='#' key={title}>
+            <MenuItem>
+                <Typography variant='h6' color='blue-gray' className='mb-1'>
+                    {title}  
+                    </Typography>
+                    <Typography variant='small' color='gray' className='font-normal'>
+                        {description}
+                    </Typography>
+            </MenuItem>
+        </a>
+    ));
+
+    return (
+        <React.Fragment>  {/**React fragment is a feature in react that allows you to return multipe elements from React Component by allowing you to group a list of children without adding extra nodes to the DOM */}
+        <Menu allowHover open={isMenuOpen} handler={setIsMenuOpen}  //upon hovering, setIsMenuOpen to true and set the resulting boolean value to open
+
+        </React.Fragment>
+    )
+}
 
 const navbar = () => {
   return (
@@ -122,3 +169,9 @@ const navbar = () => {
 }
 
 export default navbar
+
+/**
+ * Difference between jsx, ejs and html:
+ * 
+ * ejs uses a syntax similar to regular HTML, where embedded javascript code is encloused with <% %>
+ */
