@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/*Sample CSS Code*/
 body {
     text-emphasis: none;
 }
