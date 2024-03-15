@@ -1,5 +1,6 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 
+//note: rather than using mongoDb native driver, use mongoose instead, the code below requires refactoring  
 const uri = process.env.ATLAS_URI || "";
 const client = new MongoClient(uri, {
   serverApi: {
